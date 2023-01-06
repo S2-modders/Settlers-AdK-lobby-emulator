@@ -1,21 +1,25 @@
-## The Settlers II: 10th Lobby Emulator [WiP]
+## Die Siedler: Aufbruch der Kulturen Lobby Emulator [WiP]
 
-This project is an attempt to recreate the online mode of The Settlers II: 10th anniversary edition by emulating the online lobby and reimplementing the tincat3 network protocol.
+This project is an attempt to recreate the online mode of "Die Siedler: Aufbruch der Kulturen" by emulating the online lobby and reimplementing the tincat3 network protocol.
 
-Tincat version used: 3.0.53
+Tincat version used: 3.0.53 (?)
 
 ### Current Progress:
 
 - [x] create account
-- [x] login with account
+- [ ] login with account
 - [x] request and show MOTD
-- [x] show online status of other players
-- [x] global chat with properly working usernames
-- [x] error messages when auth or account creation failed
-- [x] create new game
-- [x] join new game
-- [x] launch new lobby with other players
-- [x] automatic creation of TCP bridge to bypass port forwarding issues
+- [ ] character creation
+- [ ] character deletion
+- [ ] show online status of other players
+- [ ] add and remove friend to and from friendslist
+- [ ] add user to blocklist / ignorelist
+- [ ] global chat with properly working usernames
+- [ ] error messages when auth or account creation failed
+- [ ] create new game
+- [ ] join new game
+- [ ] launch new lobby with other players
+- [ ] automatic creation of TCP bridge to bypass port forwarding issues
 - [ ] see all created games with default filter (workaround with dll hack)
 
 ### Usage
