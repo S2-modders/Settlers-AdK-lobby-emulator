@@ -452,6 +452,10 @@ namespace S2Lobby
             string name = Encoding.ASCII.GetString(nameBytes);
             byte[] password = Crypto.HashPassword(passwordBytes);
 
+            #if DEBUG
+            Logger.LogDebug($"Username: {name} | Password: {Serializer.DumpBytes(password)}");
+            #endif
+            
             Account = Program.Accounts.Get(Database.Connection, name);
             if (Account == null)
             {
