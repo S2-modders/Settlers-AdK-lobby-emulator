@@ -5,9 +5,9 @@ namespace S2Lobby
         public const uint Patchlevel = 11757;
         public const uint VersionMaj = 0;
         public const uint VersionMin = 1;
-        public static string VERSION = "v"+VersionMaj+"."+VersionMin+"-alpha 2022";
-        
-        public static string MOTD = "Welcome to The Settlers II: 10th anniversary! \n" +
+        public static string VERSION = $"v{VersionMaj}.{VersionMin}-alpha 2022 - 2023";
+
+        public static string MOTD = "Welcome to Die Siedler: Aufbruch der Kulturen! \n" +
                                     " --- you are logged in as %name% --- \n\n" +
                                     " S2 online lobby by zocker_160, cocomed and pnxr \n" +
                                     $"({VERSION}) \n\n" +
