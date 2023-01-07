@@ -61,7 +61,7 @@ namespace S2Library.Protocol
             UnknownType052 = 52,
             GetUserInfo = 53, // UnknownType053
             GetPlayerInfo = 55, // UnknownType055
-            UnknownType056 = 56,
+            RequestUserBuddyList = 56, // UnknownType056
             UnknownType057 = 57,
             UnknownType058 = 58,
             SendUserInfo = 59, // UnknownType059
@@ -89,7 +89,7 @@ namespace S2Library.Protocol
             UnknownType083 = 83,
             UnknownType084 = 84,
             UnknownType085 = 85,
-            UnknownType086 = 86,
+            AddCharacter = 86, // UnknownType086
             UnknownType087 = 87,
             ConfirmNickname = 88, // UnknownType088
             UnknownType089 = 89,
@@ -97,7 +97,7 @@ namespace S2Library.Protocol
             UnknownType091 = 91,
             UnknownType092 = 92,
             UnknownType093 = 93,
-            UnknownType094 = 94,
+            RemoveCharacter = 94, // UnknownType094
             UnknownType095 = 95,
             UnknownType096 = 96,
             UnknownType097 = 97,
@@ -152,12 +152,12 @@ namespace S2Library.Protocol
             UnknownType154 = 154,
             UnknownType155 = 155,
             UnknownType156 = 156,
-            UnknownType157 = 157,
+            RequestUserIgnoreList = 157, // UnknownType157
             GetCDKeys = 158, // UnknownType158
             SendCDKey = 159, // UnknownType159
             UnknownType160 = 160,
-            UnknownType161 = 161,
-            UnknownType162 = 162,
+            PropertyGet = 161, // UnknownType161
+            PropertyData = 162, // UnknownType162
             UnknownType163 = 163,
             UnknownType164 = 164,
             Chat = 165,
@@ -289,7 +289,7 @@ namespace S2Library.Protocol
             PayloadTypes.Add(typeof(Payload52), Types.UnknownType052);
             PayloadTypes.Add(typeof(GetUserInfo), Types.GetUserInfo); // Payload53
             PayloadTypes.Add(typeof(GetPlayerInfo), Types.GetPlayerInfo); // Payload55
-            PayloadTypes.Add(typeof(Payload56), Types.UnknownType056);
+            PayloadTypes.Add(typeof(RequestUserBuddyList), Types.RequestUserBuddyList); // Payload56
             PayloadTypes.Add(typeof(Payload57), Types.UnknownType057);
             PayloadTypes.Add(typeof(Payload58), Types.UnknownType058);
             PayloadTypes.Add(typeof(SendUserInfo), Types.SendUserInfo); // Payload59
@@ -317,7 +317,7 @@ namespace S2Library.Protocol
             PayloadTypes.Add(typeof(Payload83), Types.UnknownType083);
             PayloadTypes.Add(typeof(Payload84), Types.UnknownType084);
             PayloadTypes.Add(typeof(Payload85), Types.UnknownType085);
-            PayloadTypes.Add(typeof(Payload86), Types.UnknownType086);
+            PayloadTypes.Add(typeof(AddCharacter), Types.AddCharacter); // Payload86
             PayloadTypes.Add(typeof(Payload87), Types.UnknownType087);
             PayloadTypes.Add(typeof(ConfirmNickname), Types.ConfirmNickname); // Payload88
             PayloadTypes.Add(typeof(Payload89), Types.UnknownType089);
@@ -325,7 +325,7 @@ namespace S2Library.Protocol
             PayloadTypes.Add(typeof(Payload91), Types.UnknownType091);
             PayloadTypes.Add(typeof(Payload92), Types.UnknownType092);
             PayloadTypes.Add(typeof(Payload93), Types.UnknownType093);
-            PayloadTypes.Add(typeof(Payload94), Types.UnknownType094);
+            PayloadTypes.Add(typeof(RemoveCharacter), Types.RemoveCharacter); // Payload94
             PayloadTypes.Add(typeof(Payload95), Types.UnknownType095);
             PayloadTypes.Add(typeof(Payload96), Types.UnknownType096);
             PayloadTypes.Add(typeof(Payload97), Types.UnknownType097);
@@ -380,12 +380,12 @@ namespace S2Library.Protocol
             PayloadTypes.Add(typeof(Payload154), Types.UnknownType154);
             PayloadTypes.Add(typeof(Payload155), Types.UnknownType155);
             PayloadTypes.Add(typeof(Payload156), Types.UnknownType156);
-            PayloadTypes.Add(typeof(Payload157), Types.UnknownType157);
+            PayloadTypes.Add(typeof(RequestUserIgnoreList), Types.RequestUserIgnoreList); // Payload157
             PayloadTypes.Add(typeof(GetCDKeys), Types.GetCDKeys); // Payload158
             PayloadTypes.Add(typeof(SendCDKey), Types.SendCDKey); // Payload159
             PayloadTypes.Add(typeof(Payload160), Types.UnknownType160);
-            PayloadTypes.Add(typeof(Payload161), Types.UnknownType161);
-            PayloadTypes.Add(typeof(Payload162), Types.UnknownType162);
+            PayloadTypes.Add(typeof(PropertyGet), Types.PropertyGet);
+            PayloadTypes.Add(typeof(PropertyData), Types.PropertyData);
             PayloadTypes.Add(typeof(Payload163), Types.UnknownType163);
             PayloadTypes.Add(typeof(Payload164), Types.UnknownType164);
             PayloadTypes.Add(typeof(Chat), Types.Chat); // Payload165
@@ -533,8 +533,8 @@ namespace S2Library.Protocol
         public ushort Type1;
         public ushort Type2;
 
-        //public const ushort PayloadMagic = 0x26B6;
-        public const ushort PayloadMagic = 0x27D8;
+        public const ushort PayloadMagic = 0x26B6;
+        //public const ushort PayloadMagic = 0x27D8;
 
         public virtual void Serialize(Serializer serializer, bool fullHeader = true)
         {
@@ -1923,7 +1923,7 @@ namespace S2Library.Protocol
 //    (**(code**)(* piVar1 + 8))("user_id",8);
 //    (**(code**)(* piVar1 + 8))("ticket_id",8);
 //    (**(code**)(* unaff_EDI + 4))(0x38,piVar1);
-    public class Payload56 : PayloadPrefix
+    public class RequestUserBuddyList : PayloadPrefix
     {
         public uint UserId;
         public uint TicketId;
@@ -2678,7 +2678,7 @@ namespace S2Library.Protocol
 //    (**(code**)(* piVar1 + 4))("data",1,0);
 //    (**(code**)(* piVar1 + 8))("ticket_id",8);
 //    (**(code**)(* unaff_EDI + 4))(0x56,piVar1);
-    public class Payload86 : PayloadPrefix
+    public class AddCharacter : PayloadPrefix
     {
         public string Name;
         public uint UserId;
@@ -2883,7 +2883,7 @@ namespace S2Library.Protocol
 //    (**(code**)(* piVar1 + 8))("char_id",8);
 //    (**(code**)(* piVar1 + 8))("ticket_id",8);
 //    (**(code**)(* unaff_EDI + 4))(0x5e,piVar1);
-    public class Payload94 : PayloadPrefix
+    public class RemoveCharacter : PayloadPrefix
     {
         public uint CharId;
         public uint TicketId;
@@ -4002,7 +4002,7 @@ namespace S2Library.Protocol
 //    (**(code**)(* piVar1 + 8))("user_id",8);
 //    (**(code**)(* piVar1 + 8))("ticket_id",8);
 //    (**(code**)(* unaff_EDI + 4))(0x9d,piVar1);
-    public class Payload157 : PayloadPrefix
+    public class RequestUserIgnoreList : PayloadPrefix
     {
         public uint UserId;
         public uint TicketId;
@@ -4099,7 +4099,7 @@ namespace S2Library.Protocol
 //    (**(code**)(* piVar1 + 8))("index",9);
 //    (**(code**)(* piVar1 + 8))("ticket_id",8);
 //    (**(code**)(* unaff_EDI + 4))(0xa1,piVar1);
-    public class Payload161 : PayloadPrefix
+    public class PropertyGet : PayloadPrefix // Payload161
     {
         public int Kategory;
         public int Index;
@@ -4121,7 +4121,7 @@ namespace S2Library.Protocol
 //    (**(code**)(* piVar1 + 8))("value",9);
 //    (**(code**)(* piVar1 + 8))("ticket_id",8);
 //    (**(code**)(* unaff_EDI + 4))(0xa2,piVar1);
-    public class Payload162 : PayloadPrefix
+    public class PropertyData : PayloadPrefix // Payload162
     {
         public int Kategory;
         public int Index;

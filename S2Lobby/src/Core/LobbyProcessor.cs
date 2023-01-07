@@ -77,8 +77,8 @@ namespace S2Lobby
                 case Payloads.Types.StopServerUpdates:
                     HandleStopServerUpdates((StopServerUpdates)payload, writer);
                     return true;
-                case Payloads.Types.UnknownType056:
-                    HandlePayload056((Payload56)payload, writer);
+                case Payloads.Types.RequestUserBuddyList:
+                    HandleRequestUserBuddyList((RequestUserBuddyList)payload, writer);
                     return true;
                 case Payloads.Types.RegObserverUserLogin:
                     HandleRegObserverUserLogin((RegObserverUserLogin)payload, writer);
@@ -86,8 +86,8 @@ namespace S2Lobby
                 case Payloads.Types.DeregObserverUserLogin:
                     HandleDeregObserverUserLogin((DeregObserverUserLogin)payload, writer);
                     return true;
-                case Payloads.Types.UnknownType157:
-                    HandlePayload157((Payload157)payload, writer);
+                case Payloads.Types.RequestUserIgnoreList:
+                    HandleRequestUserIgnoreList((RequestUserIgnoreList)payload, writer);
                     return true;
                 case Payloads.Types.ConnectToServer:
                     HandleConnectToServer((ConnectToServer)payload, writer);
@@ -109,6 +109,20 @@ namespace S2Lobby
                     return true;
                 case Payloads.Types.LeaveServer:
                     HandleLeaveServer((LeaveServer) payload, writer);
+                    return true;
+                
+                case Payloads.Types.PropertyGet:
+                    HandlePropertyGet((PropertyGet)payload, writer);
+                    return true;
+                
+                // Character related messages
+                // TODO add Character info blabla
+                case Payloads.Types.RemoveCharacter:
+                    HandleRemoveCharacter((RemoveCharacter)payload, writer);
+                    return true;
+
+                case Payloads.Types.AddCharacter:
+                    HandleAddCharacter((AddCharacter)payload, writer);
                     return true;
                 
                 // Chat related packages
@@ -221,7 +235,7 @@ namespace S2Lobby
         {
             // For whatever reason MOTD is encoded as UTF-8
             byte[] motd = Encoding.UTF8.GetBytes(
-                Constants.MOTD.Replace("%name%", Account.GetUserNameStripped()));
+                Constants.MOTD.Replace("%name%", Account.UserName));
             
             SendMOTD resultPayload = Payloads.CreatePayload<SendMOTD>();
             resultPayload.Txt = motd;
@@ -603,8 +617,9 @@ namespace S2Lobby
             SendReply(writer, Payloads.CreateStatusOkMsg(payload.TicketId));
         }
 
-        private void HandlePayload056(Payload56 payload, PayloadWriter writer)
+        private void HandleRequestUserBuddyList(RequestUserBuddyList payload, PayloadWriter writer)
         {
+            // TODO
             SendReply(writer, Payloads.CreateStatusOkMsg(payload.TicketId));
         }
 
@@ -705,8 +720,9 @@ namespace S2Lobby
             SendReply(writer, Payloads.CreateStatusOkMsg(payload.TicketId));
         }
         
-        private void HandlePayload157(Payload157 payload, PayloadWriter writer)
+        private void HandleRequestUserIgnoreList(RequestUserIgnoreList payload, PayloadWriter writer)
         {
+            // TODO
             ResultStatusMsg resultPayload = Payloads.CreatePayload<ResultStatusMsg>();
             resultPayload.Errorcode = 0;
             resultPayload.Errormsg = null;
@@ -924,6 +940,31 @@ namespace S2Lobby
             {
                 SendToLobbyConnection(server.Key, unlistInfo);
             }
+        }
+
+        private void HandlePropertyGet(PropertyGet payload, PayloadWriter writer)
+        {
+            var propertyData = Payloads.CreatePayload<PropertyData>();
+            propertyData.Kategory = payload.Kategory;
+            propertyData.Index = payload.Index;
+            propertyData.Value = 0;
+            propertyData.TicketId = payload.TicketId;
+
+            SendReply(writer, propertyData);
+            SendReply(writer, Payloads.CreateStatusOkMsg(payload.TicketId));
+        }
+        
+        // Character related payloads
+        private void HandleRemoveCharacter(RemoveCharacter payload, PayloadWriter writer)
+        {
+            // TODO
+            SendReply(writer, Payloads.CreateStatusOkMsg(payload.TicketId));
+        }
+
+        private void HandleAddCharacter(AddCharacter payload, PayloadWriter writer)
+        {
+            // TODO
+            SendReply(writer, Payloads.CreateStatusOkMsg(payload.TicketId));
         }
         
         // Chat related payloads
